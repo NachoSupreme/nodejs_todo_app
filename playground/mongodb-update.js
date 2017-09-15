@@ -12,9 +12,6 @@ MongoClient.connect("mongodb://localhost:27017/TodoApp",(err, db) => {
   },{
     $set: {
       name: "Charlie 'Alexander the Great' Chaaban"
-    },
-    $inc: {
-      age: -13
     }
   }, {
     returnOriginal: false
