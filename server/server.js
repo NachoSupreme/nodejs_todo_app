@@ -8,6 +8,7 @@ var {Todo} = require("./models/todo.js");
 var {User} = require("./models/user.js");
 
 var app = express();
+const port = process.env.PORT || 3000
 
 //app.use will create a middleware for all API routes
 app.use(bodyParser.json());
@@ -72,8 +73,8 @@ app.post("/", (req, res)=> {
 
 
 
-app.listen(3000, () => {
-  console.log("Server is listening on port 3000");
+app.listen(port, () => {
+  console.log(`Server is listening on port ${port}`);
 });
 
 
