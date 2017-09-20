@@ -77,7 +77,7 @@ app.delete("/todos/:id", (req, res) => {
       return res.status(404).send();
     }
     else {
-      res.send(todo);
+      res.send({todo});
     }
   }).catch((e) => {
     res.status(404).send();
@@ -89,12 +89,5 @@ app.delete("/todos/:id", (req, res) => {
 app.listen(port, () => {
   console.log(`Server is listening on port ${port}`);
 });
-
-
-
-
-
-
-
 
 module.exports = {app};
