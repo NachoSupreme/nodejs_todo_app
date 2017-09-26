@@ -1,14 +1,4 @@
-var env = process.env.NODE_ENV || "development";
-console.log(`env *******`, env);
-
-if (env === "development") {
-  process.env.PORT = 3000;
-  process.env.MONGODB_URI = "mongodb://localhost:27017/ToDoApp"
-} else if (env === "test") {
-  process.env.PORT = 3000;
-  process.env.MONGODB_URI = "mongodb://localhost:27017/ToDoAppTest"
-}
-
+require("./config/config.js");
 
 //server.js file is only responsible for routes
 const _ = require("lodash");
@@ -130,6 +120,19 @@ app.patch("/todos/:id", (req, res) => {
 });
 
 
+// POST /users
+app.post("/users", (req, res) => {
+  var body = _.pick(req.body, ["email", "password"]);
+  var user = new User(body);
+ 
+  user.save().then(() =>{
+    return user.generateAuthToken()
+  }).then((token) => {
+    res.header("x-auth", token).send(user);
+  }).catch((e) => {
+    res.status(400).send(e);
+  })
+});
 
 app.listen(port, () => {
   console.log(`Server is listening on port ${port}`);
